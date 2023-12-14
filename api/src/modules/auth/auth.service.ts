@@ -33,9 +33,9 @@ export class AuthService {
       throw new UnauthorizedException('Senha inválida!');
     }
 
-    const acessToken = await this.generateAcessToken(user.id);
+    const accessToken = await this.generateAcessToken(user.id);
 
-    return { acessToken };
+    return { accessToken };
   }
 
   async signup(signupDto: SignupDto) {
@@ -78,9 +78,9 @@ export class AuthService {
         },
       },
     });
-    const acessToken = await this.generateAcessToken(user.id);
+    const accessToken = await this.generateAcessToken(user.id);
 
-    return { acessToken };
+    return { accessToken };
   }
 
   private generateAcessToken(userId: string) {
