@@ -5,10 +5,11 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Months } from '../../../../../app/mocks/months';
 import { SliderMonths } from './SliderMonths';
 import { SliderNavigation } from './SliderNavigation';
+import { Card } from './Card';
 
 export function Transactions () {
   return (
-    <div className="bg-gray-100 rounded-2xl w-full h-full p-10">
+    <div className="bg-gray-100 rounded-2xl w-full h-full p-10 flex flex-col">
       <header>
         <div className='flex justify-between items-center'>
           <button className='flex items-center gap-2'>
@@ -44,8 +45,8 @@ export function Transactions () {
         </Swiper>
       </div>
 
-      <div className="mt-4">
-        Conteudo
+      <div className="mt-4 space-y-2 flex-1">
+        <Card/>
       </div>
     </div>
   );
