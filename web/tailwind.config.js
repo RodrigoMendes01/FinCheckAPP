@@ -176,6 +176,20 @@ export default {
           800: '#E8590C',
           900: '#D9480F',
         },
+      },
+      keyframes: {
+        slideUpAndFade: {
+          from: { opacity: 0, transaform: 'translateY(2px)' },
+          to: {opacity: 1, transaform: 'translateY(0)'}
+        },
+        slideDownAndFade: {
+          from: { opacity: 0, transaform: 'translateY(-2px)' },
+          to: {opacity: 1, transaform: 'translateY(0)'}
+        }
+      },
+      animation: {
+        slideUpAndFade: 'slideUpAndFade 400ms cubic-bezier(0.16, 1, 0.3, 1)',
+        slideDownAndFade: 'slideDownAndFade 400ms cubic-bezier(0.16, 1, 0.3, 1)'
       }
     },
   },
