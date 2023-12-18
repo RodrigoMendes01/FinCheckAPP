@@ -6,48 +6,63 @@ import { Months } from '../../../../../app/mocks/months';
 import { SliderMonths } from './SliderMonths';
 import { SliderNavigation } from './SliderNavigation';
 import { Card } from './Card';
+import { useTransactionsController } from './useTransactionsController';
+import { Spinner } from '../../../../components/Spinner';
 
 export function Transactions () {
+  const { isLoading } = useTransactionsController();
+
   return (
     <div className="bg-gray-100 rounded-2xl w-full h-full p-10 flex flex-col">
-      <header>
-        <div className='flex justify-between items-center'>
-          <button className='flex items-center gap-2'>
-            <TransactionsIcon/>
-            <span className='text-sm text-gray-800 tracking-[-0.5px] font-medium'>Transações</span>
-            <ChevronDownIcon className="text-gray-900"/>
-          </button>
-
-          <button>
-            <FilterIcon/>
-          </button>
+      {isLoading && (
+        <div className='w-full h-full flex justify-center items-center'>
+          <Spinner/>
         </div>
-      </header>
+      )}
 
-      <div className="mt-6 relative">
-        <Swiper
-          slidesPerView={3}
-          centeredSlides
-        >
-          <SliderNavigation/>
 
-          {Months.map((month, index) => (
-            <SwiperSlide key={month}>
-              {({ isActive }) => (
-                <SliderMonths
-                  isActive={isActive}
-                  month={month}
-                  index={index}
-                />
-              )}
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      </div>
+      {!isLoading && (
+        <>
+          <header>
+            <div className='flex justify-between items-center'>
+              <button className='flex items-center gap-2'>
+                <TransactionsIcon/>
+                <span className='text-sm text-gray-800 tracking-[-0.5px] font-medium'>Transações</span>
+                <ChevronDownIcon className="text-gray-900"/>
+              </button>
 
-      <div className="mt-4 space-y-2 flex-1">
-        <Card/>
-      </div>
+              <button>
+                <FilterIcon/>
+              </button>
+            </div>
+          </header>
+
+          <div className="mt-6 relative">
+            <Swiper
+              slidesPerView={3}
+              centeredSlides
+            >
+              <SliderNavigation/>
+
+              {Months.map((month, index) => (
+                <SwiperSlide key={month}>
+                  {({ isActive }) => (
+                    <SliderMonths
+                      isActive={isActive}
+                      month={month}
+                      index={index}
+                    />
+                  )}
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </div>
+
+          <div className="mt-4 space-y-2 flex-1">
+            <Card/>
+          </div>
+        </>
+      )}
     </div>
   );
 }
