@@ -16,7 +16,8 @@ export function Accounts () {
     areValuesVisible,
     toggleValueVisibility,
     isLoading,
-    accounts
+    accounts,
+    openNewAccountModal,
   } = useAccountsController();
 
   return (
@@ -69,6 +70,7 @@ export function Accounts () {
 
                 <button
                   className='mt-4 h-52 border-2 border-dashed rounded-2xl border-teal-600 flex flex-col items-center justify-center gap-4 text-white'
+                  onClick={openNewAccountModal}
                 >
 
                   <div

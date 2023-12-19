@@ -1,6 +1,6 @@
 import { formatCurrency } from '../../../../../app/utils/formatCurrency';
 import { BankAccountTypeIcon } from '../../../../components/icons/BankAccountTypeIcon';
-import { useDashboard } from '../useAccountsController/useDashboard';
+import { useDashboard } from '../DashboardContext/useDashboard';
 
 interface AccountCardProps {
   color: string

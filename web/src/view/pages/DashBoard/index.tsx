@@ -3,7 +3,7 @@ import { UserMenu } from '../../components/UserMenu';
 import { Accounts } from './components/Accounts';
 import { Fab } from './components/Fab';
 import { Transactions } from './components/Transactions';
-import { DashBoardProvider } from './components/useAccountsController';
+import { DashBoardProvider } from './components/DashboardContext';
 
 export function DashBoard() {
   return (

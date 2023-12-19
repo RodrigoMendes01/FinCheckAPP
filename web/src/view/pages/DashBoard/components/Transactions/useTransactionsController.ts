@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useDashboard } from '../useAccountsController/useDashboard';
+import { useDashboard } from '../DashboardContext/useDashboard';
 
 export function useTransactionsController () {
   const { areValuesVisible } = useDashboard();
