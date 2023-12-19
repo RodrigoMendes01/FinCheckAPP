@@ -5,7 +5,11 @@ interface DashBoardContextValue {
   toggleValueVisibility(): void
   openNewAccountModal(): void,
   closeNewAccountModal(): void,
-  isNewAccountModalOpen: boolean
+  newTransactionType: 'INCOME' | 'EXPENSE' | null
+  isNewAccountModalOpen: boolean,
+  openNewTransactionModal(type: 'INCOME' | 'EXPENSE'): void
+  closeNewTransactionModal(): void
+  isNewTransactionModalOpen: boolean
 }
 
 export const DashBoardContext = createContext({} as DashBoardContextValue);
@@ -14,6 +18,8 @@ export const DashBoardContext = createContext({} as DashBoardContextValue);
 export function DashBoardProvider({ children }: { children: React.ReactNode }) {
   const [ areValuesVisible, setAreValuesVisible ] = useState(true);
   const [isNewAccountModalOpen, setIsNewAccountModalOpen] = useState(false);
+  const [isNewTransactionModalOpen, setIsNewTransactionModalOpen] = useState(false);
+  const [newTransactionType, setNewTransactionType] = useState<'INCOME' | 'EXPENSE' | null>(null);
 
   const toggleValueVisibility = useCallback(() => {
     setAreValuesVisible((prevState) => !prevState);
@@ -27,6 +33,16 @@ export function DashBoardProvider({ children }: { children: React.ReactNode }) {
     setIsNewAccountModalOpen(false);
   }, []);
 
+  const openNewTransactionModal = useCallback((type: 'INCOME' | 'EXPENSE') => {
+    setNewTransactionType(type);
+    setIsNewTransactionModalOpen(true);
+  }, []);
+
+  const closeNewTransactionModal = useCallback(() => {
+    setNewTransactionType(null);
+    setIsNewTransactionModalOpen(false);
+  }, []);
+
 
   return (
     <DashBoardContext.Provider
@@ -35,7 +51,11 @@ export function DashBoardProvider({ children }: { children: React.ReactNode }) {
         toggleValueVisibility,
         openNewAccountModal,
         closeNewAccountModal,
-        isNewAccountModalOpen
+        isNewAccountModalOpen,
+        isNewTransactionModalOpen,
+        openNewTransactionModal,
+        closeNewTransactionModal,
+        newTransactionType
       }}>
       {children}
     </DashBoardContext.Provider>
