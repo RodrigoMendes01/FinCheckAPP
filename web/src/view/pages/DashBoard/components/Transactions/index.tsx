@@ -1,6 +1,3 @@
-import { ChevronDownIcon } from '@radix-ui/react-icons';
-import { TransactionsIcon } from '../../../../components/icons/TransactionsIcon';
-import { FilterIcon } from '../../../../components/icons/FilterIcon';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Months } from '../../../../../app/mocks/months';
 import { SliderMonths } from './SliderMonths';
@@ -9,9 +6,19 @@ import { Card } from './Card';
 import { useTransactionsController } from './useTransactionsController';
 import { Spinner } from '../../../../components/Spinner';
 import empytState from '../../../../../assets/images/empytState.svg';
+import { TypeDropdown } from './TypeDropdown';
+import { FilterIcon } from '../../../../components/icons/FilterIcon';
+import { FiltersModal } from './FiltersModal';
 
 export function Transactions () {
-  const { isInitialLoading, isLoading, transactions } = useTransactionsController();
+  const {
+    isInitialLoading,
+    isLoading,
+    transactions,
+    isFilteredModalOpen,
+    handleOpenFiltersModal,
+    handleCloseFiltersModal
+  } = useTransactionsController();
   const hasTransactions = transactions.length > 0;
 
   return (
@@ -22,18 +29,17 @@ export function Transactions () {
         </div>
       )}
 
-
       {!isInitialLoading && (
         <>
-          <header>
-            <div className='flex justify-between items-center'>
-              <button className='flex items-center gap-2'>
-                <TransactionsIcon/>
-                <span className='text-sm text-gray-800 tracking-[-0.5px] font-medium'>Transações</span>
-                <ChevronDownIcon className="text-gray-900"/>
-              </button>
+          <FiltersModal
+            open={isFilteredModalOpen}
+            onClose={handleCloseFiltersModal}/>
 
-              <button>
+          <header>
+            <div className='flex items-center justify-between'>
+              <TypeDropdown/>
+
+              <button onClick={handleOpenFiltersModal}>
                 <FilterIcon/>
               </button>
             </div>
@@ -78,7 +84,6 @@ export function Transactions () {
               <Card/>
             )}
           </div>
-
         </>
       )}
     </div>
