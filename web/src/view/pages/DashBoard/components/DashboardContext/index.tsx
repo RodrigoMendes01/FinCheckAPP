@@ -1,4 +1,5 @@
 import { createContext, useCallback, useState } from 'react';
+import { BankAccount } from '../../../../../app/entities/BankAccount';
 
 interface DashBoardContextValue {
   areValuesVisible: boolean
@@ -10,6 +11,10 @@ interface DashBoardContextValue {
   openNewTransactionModal(type: 'INCOME' | 'EXPENSE'): void
   closeNewTransactionModal(): void
   isNewTransactionModalOpen: boolean
+  openEditAccountModal(bankAccount: BankAccount): void
+  closeEditAccountModal(): void
+  isEditAccountModalOpen: boolean
+  accountBeingEdited: null | BankAccount
 }
 
 export const DashBoardContext = createContext({} as DashBoardContextValue);
@@ -18,6 +23,8 @@ export const DashBoardContext = createContext({} as DashBoardContextValue);
 export function DashBoardProvider({ children }: { children: React.ReactNode }) {
   const [ areValuesVisible, setAreValuesVisible ] = useState(true);
   const [isNewAccountModalOpen, setIsNewAccountModalOpen] = useState(false);
+  const [isEditAccountModalOpen, setIsEditAccountModalOpen] = useState(false);
+  const [accountBeingEdited, setAccountBeingEdited] = useState<null | BankAccount>(null);
   const [isNewTransactionModalOpen, setIsNewTransactionModalOpen] = useState(false);
   const [newTransactionType, setNewTransactionType] = useState<'INCOME' | 'EXPENSE' | null>(null);
 
@@ -31,6 +38,16 @@ export function DashBoardProvider({ children }: { children: React.ReactNode }) {
 
   const closeNewAccountModal = useCallback(() => {
     setIsNewAccountModalOpen(false);
+  }, []);
+
+  const openEditAccountModal = useCallback((bankAccount: BankAccount) => {
+    setIsEditAccountModalOpen(true);
+    setAccountBeingEdited(bankAccount);
+  }, []);
+
+  const closeEditAccountModal = useCallback(() => {
+    setIsEditAccountModalOpen(false);
+    setAccountBeingEdited(null);
   }, []);
 
   const openNewTransactionModal = useCallback((type: 'INCOME' | 'EXPENSE') => {
@@ -55,7 +72,11 @@ export function DashBoardProvider({ children }: { children: React.ReactNode }) {
         isNewTransactionModalOpen,
         openNewTransactionModal,
         closeNewTransactionModal,
-        newTransactionType
+        newTransactionType,
+        openEditAccountModal,
+        closeEditAccountModal,
+        isEditAccountModalOpen,
+        accountBeingEdited
       }}>
       {children}
     </DashBoardContext.Provider>
