@@ -27,7 +27,7 @@ export function AccountCard({ data }: AccountCardProps) {
         <span
           className='text-gray-800 font-medium tracking-[-0.5px] block'
         >
-          {!areValuesVisible ? formatCurrency(currentBalance) : 'R$ ******'}
+          {areValuesVisible ? formatCurrency(currentBalance) : 'R$ ******'}
         </span>
 
         <small className='text-gray-600 text-sm'>Saldo atual</small>

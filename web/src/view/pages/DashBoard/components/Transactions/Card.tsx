@@ -17,7 +17,7 @@ export function Card () {
       </div>
 
       <span className='tracking-[-0.5px] text-red-800 font-medium'>
-        {!areValuesVisible ? `-${formatCurrency(200)}`: 'R$ ******'}
+        {areValuesVisible ? `-${formatCurrency(200)}`: 'R$ ******'}
       </span>
     </div>
   );

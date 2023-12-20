@@ -1,17 +1,17 @@
-
 import { sleep } from '../../utils/sleep';
 import httpClient from '../httpClient';
 
-export interface CreateBankAccountParams {
+export interface UpdateBankAccountParams {
+  id: string
   name: string
   initialBalance: number
   color: string
   type: 'INVESTMENT' | 'CHECKING' | 'CASH'
 }
 
-export async function create (params: CreateBankAccountParams) {
+export async function update ({ id, ...params }: UpdateBankAccountParams) {
   await sleep();
-  const { data } = await httpClient.post('/bank-accounts', params);
+  const { data } = await httpClient.put(`/bank-accounts/${id}`, params);
 
   return data;
 }

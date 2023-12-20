@@ -42,7 +42,7 @@ export function Accounts () {
               <strong
                 className='text-2xl tracking-[-1px] text-white'
               >
-                {!areValuesVisible ? formatCurrency(currentBalance) : 'R$ ******'}
+                {areValuesVisible ? formatCurrency(currentBalance) : 'R$ ******'}
               </strong>
 
               <button

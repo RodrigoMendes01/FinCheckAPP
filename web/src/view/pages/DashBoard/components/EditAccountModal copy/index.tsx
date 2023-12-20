@@ -6,6 +6,8 @@ import { Modal } from '../../../../components/Modal';
 import { Select } from '../../../../components/Select';
 import { EditAccountController } from './useEditAccountController';
 import { Button } from '../../../../components/Button';
+import { TrashIcon } from '../../../../components/icons/TrashIcon';
+import { ConfirmDeleteModal } from '../../../../components/ConfirmDeleteModal';
 
 export function EditAccountModal () {
   const {
@@ -15,14 +17,34 @@ export function EditAccountModal () {
     handleSubmit,
     register,
     control,
-    isPending
+    isPending,
+    isDeleteModalOpen,
+    handleCloseDeleteModal,
+    handleOpenDeleteModal,
+    handleDeleteAccount,
+    isPendingDeleteAccount
   } = EditAccountController();
+
+  if(isDeleteModalOpen) {
+    return <ConfirmDeleteModal
+      isLoading={isPendingDeleteAccount}
+      onClose={handleCloseDeleteModal}
+      onConfirm={handleDeleteAccount}
+      title='Tem certeza que deseja exluir está conta?'
+      description='Ao excluir a conta, também serão excluídos todos os registros de receita e despesas relacionados'
+    />;
+  }
 
   return (
     <Modal
       title='Editar Conta'
       open={isEditAccountModalOpen}
       onClose={closeEditAccountModal}
+      rightAction={(
+        <button onClick={handleOpenDeleteModal}>
+          <TrashIcon className='w-6 h-6 text-red-900'/>
+        </button>
+      )}
     >
       <form onSubmit={handleSubmit}>
 
@@ -91,10 +113,11 @@ export function EditAccountModal () {
             control={control}
             name='color'
             defaultValue=''
-            render={({ field: { onChange } }) => (
+            render={({ field: { onChange, value } }) => (
               <ColorsDropdown
                 error={errors.color?.message}
                 onChange={onChange}
+                value={value}
               />
             )}
           />
@@ -102,7 +125,7 @@ export function EditAccountModal () {
         </div>
 
         <Button type='submit' className='w-full mt-6' isLoading={isPending}>
-          Criar
+          Salvar
         </Button>
 
       </form>
