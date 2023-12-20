@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 import { bankAccountService } from '../../../../../app/services/bankAccountService';
-import { BankAccountParams } from '../../../../../app/services/bankAccountService/create';
+import { CreateBankAccountParams } from '../../../../../app/services/bankAccountService/create';
 import { currencyStringToNumber } from '../../../../../app/utils/currencyStringToNumber';
 
 const schema = z.object({
@@ -35,7 +35,7 @@ export function NewAccountController () {
 
   const queryClient = useQueryClient();
   const { isPending, mutateAsync }=  useMutation({
-    mutationFn: async (data: BankAccountParams) => {
+    mutationFn: async (data: CreateBankAccountParams) => {
       return bankAccountService.create(data);
     }
   });
