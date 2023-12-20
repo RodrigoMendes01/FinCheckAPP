@@ -11,13 +11,23 @@ interface SelectProps {
     value: string
     label: string
   }[]
+  onChange(value: string): void
+  value?: string
 }
 
-export function Select ({ className, error, placeholder, options }: SelectProps) {
-  const [selectedValue, setSelectedValue] = useState('');
+export function Select ({
+  className,
+  error,
+  placeholder,
+  options,
+  onChange,
+  value
+}: SelectProps) {
+  const [selectedValue, setSelectedValue] = useState(value);
 
   function handleSelect(value: string) {
     setSelectedValue(value);
+    onChange(value);
   }
 
   return (
@@ -29,7 +39,7 @@ export function Select ({ className, error, placeholder, options }: SelectProps)
           {placeholder}
         </label>
 
-        <RedixSelect.Root onValueChange={handleSelect}>
+        <RedixSelect.Root value={value} onValueChange={handleSelect}>
           <RedixSelect.Trigger
             className={cn('bg-white rounded-lg w-full border border-gray-500 px-3 h-[52px] text-gray-800 focus:border-gray-800 transition-all outline-none text-left relative pt-4', error && '!border-red-900', className
             )}
