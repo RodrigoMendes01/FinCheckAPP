@@ -1,10 +1,8 @@
+import { User } from '../../entities/User';
 import { sleep } from '../../utils/sleep';
 import httpClient from '../httpClient';
 
-interface MeResponse {
-  name: string
-  email: string
-}
+type MeResponse = User
 
 export async function me () {
   await sleep();
