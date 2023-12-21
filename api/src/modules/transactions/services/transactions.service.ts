@@ -22,7 +22,7 @@ export class TransactionsService {
 
     await this.validateEntitiesOwnership({ userId, bankAccountId, categoryId });
 
-    this.transactionsRepo.create({
+    return this.transactionsRepo.create({
       data: {
         userId,
         bankAccountId,
