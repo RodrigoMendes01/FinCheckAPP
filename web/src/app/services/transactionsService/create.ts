@@ -1,4 +1,3 @@
-import { sleep } from '../../utils/sleep';
 import httpClient from '../httpClient';
 
 export interface CreateTransactionParams {
@@ -11,7 +10,6 @@ export interface CreateTransactionParams {
 }
 
 export async function create (params: CreateTransactionParams) {
-  await sleep();
   const { data } = await httpClient.post('/transactions', params);
 
   return data;

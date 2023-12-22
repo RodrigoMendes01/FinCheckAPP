@@ -1,4 +1,3 @@
-import { sleep } from '../../utils/sleep';
 import httpClient from '../httpClient';
 
 export interface UpdateTransactionParams {
@@ -12,7 +11,6 @@ export interface UpdateTransactionParams {
 }
 
 export async function update({id, ...params}: UpdateTransactionParams) {
-  await sleep();
   const { data } = await httpClient.put(`/transactions/${id}`, params);
 
   return data;
