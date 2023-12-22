@@ -12,7 +12,7 @@ import { formatCurrency } from '../../../../../app/utils/formatCurrency';
 import { CategoryIcon } from '../../../../components/icons/categories/CategoryIcon';
 import { cn } from '../../../../../app/utils/cn';
 import { formatDate } from '../../../../../app/utils/formatDate';
-import { EditTransactionModal } from '../EditTransactionModal copy';
+import { EditTransactionModal } from '../Modals/EditTransactionModal';
 
 export function Transactions () {
   const {

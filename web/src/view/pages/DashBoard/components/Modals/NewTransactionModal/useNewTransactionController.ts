@@ -1,15 +1,15 @@
 import { z } from 'zod';
-import { useDashboard } from '../DashboardContext/useDashboard';
+import { useDashboard } from '../../DashboardContext/useDashboard';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { useBankAccounts } from '../../../../../app/hooks/useBankAccounts';
-import { useCategories } from '../../../../../app/hooks/useCategories';
+import { useBankAccounts } from '../../../../../../app/hooks/useBankAccounts';
+import { useCategories } from '../../../../../../app/hooks/useCategories';
 import { useMemo } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { transactionsService } from '../../../../../app/services/transactionsService';
-import { CreateTransactionParams } from '../../../../../app/services/transactionsService/create';
+import { transactionsService } from '../../../../../../app/services/transactionsService';
+import { CreateTransactionParams } from '../../../../../../app/services/transactionsService/create';
 import toast from 'react-hot-toast';
-import { currencyStringToNumber } from '../../../../../app/utils/currencyStringToNumber';
+import { currencyStringToNumber } from '../../../../../../app/utils/currencyStringToNumber';
 
 const schema = z.object({
   value: z.union([

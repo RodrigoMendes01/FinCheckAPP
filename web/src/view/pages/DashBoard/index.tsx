@@ -4,9 +4,9 @@ import { Accounts } from './components/Accounts';
 import { Fab } from './components/Fab';
 import { Transactions } from './components/Transactions';
 import { DashBoardContext, DashBoardProvider } from './components/DashboardContext';
-import { NewAccountModal } from './components/NewAccountModal';
-import { NewTransactionModal } from './components/NewTransactionModal';
-import { EditAccountModal } from './components/EditAccountModal copy';
+import { NewAccountModal } from './components/Modals/NewAccountModal';
+import { NewTransactionModal } from './components/Modals/NewTransactionModal';
+import { EditAccountModal } from './components/Modals/EditAccountModal';
 
 export function DashBoard() {
   return (

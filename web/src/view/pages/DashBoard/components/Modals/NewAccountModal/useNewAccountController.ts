@@ -1,12 +1,12 @@
 import { z } from 'zod';
-import { useDashboard } from '../DashboardContext/useDashboard';
+import { useDashboard } from '../../DashboardContext/useDashboard';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
-import { bankAccountService } from '../../../../../app/services/bankAccountService';
-import { CreateBankAccountParams } from '../../../../../app/services/bankAccountService/create';
-import { currencyStringToNumber } from '../../../../../app/utils/currencyStringToNumber';
+import { bankAccountService } from '../../../../../../app/services/bankAccountService';
+import { CreateBankAccountParams } from '../../../../../../app/services/bankAccountService/create';
+import { currencyStringToNumber } from '../../../../../../app/utils/currencyStringToNumber';
 
 const schema = z.object({
   initialBalance: z.string().min(1, 'Saldo inicial é obrigatório'),

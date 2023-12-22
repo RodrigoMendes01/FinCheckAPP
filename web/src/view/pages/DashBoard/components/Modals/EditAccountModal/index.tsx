@@ -1,28 +1,50 @@
 import { Controller } from 'react-hook-form';
-import { ColorsDropdown } from '../../../../components/ColorsDropdown';
-import { Input } from '../../../../components/Input';
-import { InputCurrency } from '../../../../components/InputCurrency';
-import { Modal } from '../../../../components/Modal';
-import { Select } from '../../../../components/Select';
-import { NewAccountController } from './useNewAccountController';
-import { Button } from '../../../../components/Button';
+import { ColorsDropdown } from '../../../../../components/ColorsDropdown';
+import { Input } from '../../../../../components/Input';
+import { InputCurrency } from '../../../../../components/InputCurrency';
+import { Modal } from '../../../../../components/Modal';
+import { Select } from '../../../../../components/Select';
+import { EditAccountController } from './useEditAccountController';
+import { Button } from '../../../../../components/Button';
+import { TrashIcon } from '../../../../../components/icons/TrashIcon';
+import { ConfirmDeleteModal } from '../../../../../components/ConfirmDeleteModal';
 
-export function NewAccountModal () {
+export function EditAccountModal () {
   const {
-    closeNewAccountModal,
-    isNewAccountModalOpen,
+    closeEditAccountModal,
+    isEditAccountModalOpen,
     errors,
     handleSubmit,
     register,
     control,
-    isPending
-  } = NewAccountController();
+    isPending,
+    isDeleteModalOpen,
+    handleCloseDeleteModal,
+    handleOpenDeleteModal,
+    handleDeleteAccount,
+    isPendingDeleteAccount
+  } = EditAccountController();
+
+  if(isDeleteModalOpen) {
+    return <ConfirmDeleteModal
+      isLoading={isPendingDeleteAccount}
+      onClose={handleCloseDeleteModal}
+      onConfirm={handleDeleteAccount}
+      title='Tem certeza que deseja exluir está conta?'
+      description='Ao excluir a conta, também serão excluídos todos os registros de receita e despesas relacionados'
+    />;
+  }
 
   return (
     <Modal
-      title='Nova Conta'
-      open={isNewAccountModalOpen}
-      onClose={closeNewAccountModal}
+      title='Editar Conta'
+      open={isEditAccountModalOpen}
+      onClose={closeEditAccountModal}
+      rightAction={(
+        <button onClick={handleOpenDeleteModal}>
+          <TrashIcon className='w-6 h-6 text-red-900'/>
+        </button>
+      )}
     >
       <form onSubmit={handleSubmit}>
 
@@ -91,10 +113,11 @@ export function NewAccountModal () {
             control={control}
             name='color'
             defaultValue=''
-            render={({ field: { onChange } }) => (
+            render={({ field: { onChange, value } }) => (
               <ColorsDropdown
                 error={errors.color?.message}
                 onChange={onChange}
+                value={value}
               />
             )}
           />
@@ -102,7 +125,7 @@ export function NewAccountModal () {
         </div>
 
         <Button type='submit' className='w-full mt-6' isLoading={isPending}>
-          Criar
+          Salvar
         </Button>
 
       </form>
