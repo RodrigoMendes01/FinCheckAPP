@@ -1,8 +1,9 @@
-import { ChevronDownIcon, CrossCircledIcon } from '@radix-ui/react-icons';
+import { ChevronDownIcon } from '@radix-ui/react-icons';
 import { cn } from '../../app/utils/cn';
 import { DropdownMenu } from './DropdownMenu';
 import { ColorIcon } from './icons/ColorIcon';
 import { useState } from 'react';
+import { Error } from './Error';
 
 interface ColorsDropdownProps {
   error?: string
@@ -87,10 +88,9 @@ export function ColorsDropdown({ error, className, onChange, value }: ColorsDrop
       </DropdownMenu.Root>
 
       {error && (
-        <div className='flex gap-2 items-center mt-2 text-red-900'>
-          <CrossCircledIcon/>
-          <span className='text-xs'>{error}</span>
-        </div>
+        <Error
+          error={error}
+        />
       )}
     </div>
   );

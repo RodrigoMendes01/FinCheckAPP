@@ -1,7 +1,8 @@
 import * as RedixSelect from '@radix-ui/react-select';
 import { cn } from '../../app/utils/cn';
-import { ChevronDownIcon, CrossCircledIcon } from '@radix-ui/react-icons';
+import { ChevronDownIcon } from '@radix-ui/react-icons';
 import { useState } from 'react';
+import { Error } from './Error';
 
 interface SelectProps {
   className?: string;
@@ -85,10 +86,9 @@ export function Select ({
       </div>
 
       {error && (
-        <div className='flex gap-2 items-center mt-2 text-red-900'>
-          <CrossCircledIcon/>
-          <span className='text-xs'>{error}</span>
-        </div>
+        <Error
+          error={error}
+        />
       )}
     </div>
   );
